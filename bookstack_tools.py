@@ -147,7 +147,26 @@ class bookstack_tools:
 
 
     def move_page(self, page, chapter):
-        print(f"Move page {page['id']} {page['name']} to chapter {chapter['id']} {chapter['name']}")
+
+        print(f"Moving page {page['id']} {page['name']} to chapter {chapter['id']} {chapter['name']}")
+
+        headers = {
+            'Authorization': f'Token {self.api_id}:{self.api_secret}'
+        }
+        url = f"{self.address}/api/pages/{page['id']}"
+
+        body = {
+            "chapter_id": chapter['id']
+        }
+
+        response = requests.put(url, headers=headers, json=body)
+
+        if response.status_code == 200:
+            updated_page = response.json()
+            print(f'Page {updated_page["id"]} moved sucessfully to book {updated_page["book_id"]}, chapter {updated_page["chapter_id"]}:')
+        else:
+            print("Error moving page. Error code:", response.status_code)
+
 
 if __name__ == '__main__':
     book_name = 'Move pages source'
