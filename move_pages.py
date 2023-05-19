@@ -22,10 +22,13 @@ if __name__ == '__main__':
     # Получение параметров командной строки
     arguments, values = getopt.getopt(sys.argv[1:], short_options, long_options)
 
+    if len(arguments)<2:
+        print("Usage: move_pages.py -h|--help -s|--source <source book> -d|--destination <destination chapter>")
+        sys.exit(2)
     # Обработка полученных параметров
     for current_argument, current_value in arguments:
         if current_argument in ("-h", "--help"):
-            print("Справка: move_pages.py -h|--help -s|--source <source book> -d|--destination <destination chapter>")
+            print("Usage: move_pages.py -h|--help -s|--source <source book> -d|--destination <destination chapter>")
         elif current_argument in ("-s", "--source"):
             book_name = current_value
             print("Source book name:", book_name)
