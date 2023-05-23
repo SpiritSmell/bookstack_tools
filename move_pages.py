@@ -11,31 +11,41 @@ ADDRESS = 'https://wiki.eurasia.kz'
 
 if __name__ == '__main__':
     # read command line
-    book_name = ''
-    chapter_name = ''
+    source_book_name = None
+    source_chapter_name = None
+    destination_book_name = None
+    destination_chapter_name = None
 
     # Определение опций и аргументов командной строки
-    short_options = "hs:d:i:k:a:"
-    long_options = ["help", "source=", "destination=", "id=", "key=", "address="]
+    short_options = "hsc:sb:dc:db:i:k:a:"
+    long_options = ["help", "source_chapter=", "source_book=", "destination_chapter=", "destination_book=", "id=", "key=", "address="]
 
     # Получение параметров командной строки
     arguments, values = getopt.getopt(sys.argv[1:], short_options, long_options)
 
     if len(arguments) < 5:
-        print("Usage: move_pages.py -h|--help -s|--source <source book> -d|--destination <destination chapter> -i|--id <id token> -k|--key -a|--address <wiki address>")
+        print("Usage: move_pages.py -h|--help -sc|--source_chapter <source chapter> -sb|--source_book <source book>")
+        print(" -dc|--destination_chapter <destination chapter>  -db|--destination_book <destination book> ")
         print(" -i|--id <API id> -k|--key <API key> -a|--address <wiki address>")
         sys.exit(2)
     # Обработка полученных параметров
     for current_argument, current_value in arguments:
         if current_argument in ("-h", "--help"):
-            print("Usage: move_pages.py -h|--help -s|--source <source book> -d|--destination <destination chapter>")
+            print("Usage: move_pages.py -h|--help -sc|--source_chapter <source chapter> -sb|--source_book <source book>")
+            print(" -dc|--destination_chapter <destination chapter>  -db|--destination_book <destination book> ")
             print(" -i|--id <API id> -k|--key <API key> -a|--address <wiki address>")
-        elif current_argument in ("-s", "--source"):
-            book_name = current_value
-            print("Source book name:", book_name)
-        elif current_argument in ("-d", "--destination"):
-            chapter_name = current_value
-            print("Destination chapter name:", chapter_name)
+        elif current_argument in ("-sc", "--source_chapter"):
+            source_chapter_name = current_value
+            print("Source chapter name:", source_chapter_name)
+        elif current_argument in ("-sb", "--source_book"):
+            source_book_name = current_value
+            print("Source book name:", source_book_name)
+        elif current_argument in ("-dc", "--destination_chapter"):
+            destination_chapter_name = current_value
+            print("Destination chapter name:", destination_chapter_name)
+        elif current_argument in ("-dc", "--destination_book"):
+            destination_book_name = current_value
+            print("Destination book name:", destination_book_name)
         elif current_argument in ("-i", "--id"):
             API_ID = current_value
             print("ID:", API_ID)
@@ -51,4 +61,5 @@ if __name__ == '__main__':
         print("Extra arguments:", value)
 
     bt = bookstack_tools(API_ID, API_SECRET, ADDRESS)
-    bt.move_from_book_to_chapter(book_name, chapter_name)
+    bt.move_pages(source_book_name=source_book_name, source_chapter_name=source_chapter_name,
+                  destination_book_name=destination_book_name, destination_chapter_name=destination_chapter_name)
