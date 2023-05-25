@@ -16,11 +16,11 @@ if __name__ == '__main__':
     destination_book_name = None
     destination_chapter_name = None
 
-    # Определение опций и аргументов командной строки
+    # options definition
     short_options = "hsc:sb:dc:db:i:k:a:"
     long_options = ["help", "source_chapter=", "source_book=", "destination_chapter=", "destination_book=", "id=", "key=", "address="]
 
-    # Получение параметров командной строки
+    # get command line arguments
     arguments, values = getopt.getopt(sys.argv[1:], short_options, long_options)
 
     if len(arguments) < 5:

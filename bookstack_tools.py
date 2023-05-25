@@ -38,6 +38,7 @@ class bookstack_tools:
             return results
         else:
             print(f"Error getting pages: {response.status_code}")
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             print(response.json())
             return None
 
@@ -87,6 +88,7 @@ class bookstack_tools:
                 f'Page {updated_page["id"]} moved sucessfully to book {updated_page["book_id"]}, chapter {updated_page["chapter_id"]}:')
         else:
             print("Error moving page. Error code:", response.status_code)
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
 
     def refresh_chapters(self):
 
@@ -108,6 +110,7 @@ class bookstack_tools:
 
         else:
             print(f"Error getting chapters: {response.status_code}")
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             print(response.json())
             return None
 
@@ -152,6 +155,7 @@ class bookstack_tools:
             return updated_chapter
         else:
             print("Error creating chapter. Error code:", response.status_code)
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             return None
 
     def delete_chapter(self, chapter):
@@ -170,6 +174,7 @@ class bookstack_tools:
             return chapter
         else:
             print("Error deleting chapter. Error code:", response.status_code)
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             return None
 
     def move_chapter(self, book, chapter):
@@ -210,6 +215,7 @@ class bookstack_tools:
 
         else:
             print(f"Error getting chapter details: {response.status_code}")
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             print(response.json())
             return None
 
@@ -233,6 +239,7 @@ class bookstack_tools:
 
         else:
             print(f"Error getting books: {response.status_code}")
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             print(response.json())
             return None
 
@@ -271,6 +278,7 @@ class bookstack_tools:
 
         else:
             print(f"Error getting book details: {response.status_code}")
+            print("                   Error description:", response.text.encode().decode('unicode_escape'))
             print(response.json())
             return None
 
